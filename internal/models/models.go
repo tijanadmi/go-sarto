@@ -10,6 +10,7 @@ type User struct {
 	FirstName   string
 	LastName    string
 	Email       string
+	Phone     string
 	Password    string
 	AccessLevel int
 	CreatedAt   time.Time
@@ -19,7 +20,18 @@ type User struct {
 // Room is the room model
 type Room struct {
 	ID        int
-	RoomName  string
+	RoomNameSr  string
+	RoomNameEn  string
+	RoomNameBg  string
+	RoomShortDescSr  string
+	RoomShortDescEn  string
+	RoomShortDescBg  string
+	RoomDescSr  string
+	RoomDescEn  string
+	RoomDescBg  string
+	RoomPictureFolder  string
+	RoomGuestNumber  string
+	RoomPriceEn  string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
@@ -27,7 +39,9 @@ type Room struct {
 // Restriction is the restriction model
 type Restriction struct {
 	ID              int
-	RestrictionName string
+	RestrictionNameSr string
+	RestrictionNameEn string
+	RestrictionNameBg string
 	CreatedAt       time.Time
 	UpdatedAt       time.Time
 }

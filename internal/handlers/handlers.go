@@ -95,7 +95,9 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res.Room.RoomName = room.RoomName
+	res.Room.RoomNameSr = room.RoomNameSr
+	res.Room.RoomNameEn = room.RoomNameEn
+	res.Room.RoomNameBg = room.RoomNameBg
 
 	m.App.Session.Put(r.Context(), "reservation", res)
 
@@ -194,10 +196,10 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		return
 
 	}
-	log.Println("Pred insert")
+
 	m.DB.AllUsers()
 	newReservationID, err := m.DB.InsertReservation(reservation)
-	log.Println("Posle insert")
+	
 	if err != nil {
 		/*m.App.Session.Put(r.Context(), "error", "can't insert room restriction!")
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
@@ -298,7 +300,7 @@ func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, i := range rooms {
-		m.App.InfoLog.Println("ROOM:", i.ID, i.RoomName)
+		m.App.InfoLog.Println("ROOM:", i.ID, i.RoomNameEn)
 	}
 
 	if len(rooms) == 0 {
@@ -465,7 +467,7 @@ func (m *Repository) BookRoom(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res.Room.RoomName = room.RoomName
+	res.Room.RoomNameEn = room.RoomNameEn
 	res.RoomID = roomID
 	res.StartDate = startDate
 	res.EndDate = endDate

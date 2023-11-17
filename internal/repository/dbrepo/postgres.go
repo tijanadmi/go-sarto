@@ -24,8 +24,8 @@ func (m *postgresDBRepo) InsertReservation(res models.Reservation) (int, error) 
 	var newID int
 
 	stmt := `insert into reservations (first_name, last_name, email, phone, start_date,
-			end_date, room_id, created_at, updated_at) 
-			values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning id`
+			end_date, room_id, processed, created_at, updated_at) 
+			values ($1, $2, $3, $4, $5, $6, $7, 0, $8, $9) returning id`
 
 	err := m.DB.QueryRowContext(ctx, stmt,
 		res.FirstName,
@@ -39,7 +39,6 @@ func (m *postgresDBRepo) InsertReservation(res models.Reservation) (int, error) 
 		time.Now(),
 	).Scan(&newID)
 
-	log.Println("Nije prosao insert")
 	if err != nil {
 		log.Println("Nije prosao insert")
 		return 0, err
@@ -111,7 +110,19 @@ func (m *postgresDBRepo) SearchAvailabilityForAllRooms(start, end time.Time) ([]
 
 	query := `
 		select
-			r.id, r.room_name
+		r.id,
+		r.room_name_sr,
+		r.room_name_en,
+		r.room_name_bg,
+		r.room_short_des_sr,
+		r.room_short_des_en,
+		r.room_short_des_bg,
+		r.room_description_sr,
+		r.room_description_en,
+		r.room_description_bg,
+		r.room_pictures_folder,
+		r.room_guest_number,
+		r.room_price_en
 		from
 			rooms r
 		where r.id not in 
@@ -127,7 +138,18 @@ func (m *postgresDBRepo) SearchAvailabilityForAllRooms(start, end time.Time) ([]
 		var room models.Room
 		err := rows.Scan(
 			&room.ID,
-			&room.RoomName,
+			&room.RoomNameSr,
+			&room.RoomNameEn,
+			&room.RoomNameBg,
+			&room.RoomShortDescSr,
+			&room.RoomShortDescEn,
+			&room.RoomShortDescBg,
+			&room.RoomDescSr,
+			&room.RoomDescEn,
+			&room.RoomDescBg,
+			&room.RoomPictureFolder,
+			&room.RoomGuestNumber,
+			&room.RoomPriceEn,
 		)
 		if err != nil {
 			return rooms, err
@@ -150,13 +172,36 @@ func (m *postgresDBRepo) GetRoomByID(id int) (models.Room, error) {
 	var room models.Room
 
 	query := `
-		select id, room_name, created_at, updated_at from rooms where id = $1
+		select r.id,
+		r.room_name_sr,
+		r.room_name_en,
+		r.room_name_bg,
+		r.room_short_des_sr,
+		r.room_short_des_en,
+		r.room_short_des_bg,
+		r.room_description_sr,
+		r.room_description_en,
+		r.room_description_bg,
+		r.room_pictures_folder,
+		r.room_guest_number,
+		r.room_price_en, r.created_at, r.updated_at from rooms r where r.id = $1
 `
 
 	row := m.DB.QueryRowContext(ctx, query, id)
 	err := row.Scan(
 		&room.ID,
-		&room.RoomName,
+			&room.RoomNameSr,
+			&room.RoomNameEn,
+			&room.RoomNameBg,
+			&room.RoomShortDescSr,
+			&room.RoomShortDescEn,
+			&room.RoomShortDescBg,
+			&room.RoomDescSr,
+			&room.RoomDescEn,
+			&room.RoomDescBg,
+			&room.RoomPictureFolder,
+			&room.RoomGuestNumber,
+			&room.RoomPriceEn,
 		&room.CreatedAt,
 		&room.UpdatedAt,
 	)
@@ -255,7 +300,9 @@ func (m *postgresDBRepo) AllReservations() ([]models.Reservation, error) {
 	query := `
 		select r.id, r.first_name, r.last_name, r.email, r.phone, r.start_date, 
 		r.end_date, r.room_id, r.created_at, r.updated_at, r.processed,
-		rm.id, rm.room_name
+		rm.id, rm.room_name_sr,
+		rm.room_name_en,
+		rm.room_name_bg
 		from reservations r
 		left join rooms rm on (r.room_id = rm.id)
 		order by r.start_date asc
@@ -282,7 +329,9 @@ func (m *postgresDBRepo) AllReservations() ([]models.Reservation, error) {
 			&i.UpdatedAt,
 			&i.Processed,
 			&i.Room.ID,
-			&i.Room.RoomName,
+			&i.Room.RoomNameSr,
+			&i.Room.RoomNameEn,
+			&i.Room.RoomNameBg,
 		)
 
 		if err != nil {
@@ -308,7 +357,9 @@ func (m *postgresDBRepo) AllNewReservations() ([]models.Reservation, error) {
 	query := `
 		select r.id, r.first_name, r.last_name, r.email, r.phone, r.start_date, 
 		r.end_date, r.room_id, r.created_at, r.updated_at, 
-		rm.id, rm.room_name
+		rm.id, rm.room_name_sr,
+		rm.room_name_en,
+		rm.room_name_bg
 		from reservations r
 		left join rooms rm on (r.room_id = rm.id)
 		where processed = 0
@@ -335,7 +386,9 @@ func (m *postgresDBRepo) AllNewReservations() ([]models.Reservation, error) {
 			&i.CreatedAt,
 			&i.UpdatedAt,
 			&i.Room.ID,
-			&i.Room.RoomName,
+			&i.Room.RoomNameSr,
+			&i.Room.RoomNameEn,
+			&i.Room.RoomNameBg,
 		)
 
 		if err != nil {
@@ -361,7 +414,9 @@ func (m *postgresDBRepo) GetReservationByID(id int) (models.Reservation, error) 
 	query := `
 		select r.id, r.first_name, r.last_name, r.email, r.phone, r.start_date,
 		r.end_date, r.room_id, r.created_at, r.updated_at, r.processed, 
-		rm.id, rm.room_name
+		rm.id, rm.room_name_sr,
+		rm.room_name_en,
+		rm.room_name_bg
 		from reservations r
 		left join rooms rm on (r.room_id = rm.id)
 		where r.id = $1
@@ -380,7 +435,9 @@ func (m *postgresDBRepo) GetReservationByID(id int) (models.Reservation, error) 
 		&res.UpdatedAt,
 		&res.Processed,
 		&res.Room.ID,
-		&res.Room.RoomName,
+		&res.Room.RoomNameSr,
+		&res.Room.RoomNameEn,
+		&res.Room.RoomNameBg,
 	)
 
 	if err != nil {
@@ -452,7 +509,19 @@ func (m *postgresDBRepo) AllRooms() ([]models.Room, error) {
 
 	var rooms []models.Room
 
-	query := `select id, room_name, created_at, updated_at from rooms order by room_name`
+	query := `select r.id,
+	r.room_name_sr,
+	r.room_name_en,
+	r.room_name_bg,
+	r.room_short_des_sr,
+	r.room_short_des_en,
+	r.room_short_des_bg,
+	r.room_description_sr,
+	r.room_description_en,
+	r.room_description_bg,
+	r.room_pictures_folder,
+	r.room_guest_number,
+	r.room_price_en, created_at, updated_at from rooms r order by r.id`
 
 	rows, err := m.DB.QueryContext(ctx, query)
 	if err != nil {
@@ -464,7 +533,18 @@ func (m *postgresDBRepo) AllRooms() ([]models.Room, error) {
 		var rm models.Room
 		err := rows.Scan(
 			&rm.ID,
-			&rm.RoomName,
+			&rm.RoomNameSr,
+			&rm.RoomNameEn,
+			&rm.RoomNameBg,
+			&rm.RoomShortDescSr,
+			&rm.RoomShortDescEn,
+			&rm.RoomShortDescBg,
+			&rm.RoomDescSr,
+			&rm.RoomDescEn,
+			&rm.RoomDescBg,
+			&rm.RoomPictureFolder,
+			&rm.RoomGuestNumber,
+			&rm.RoomPriceEn,
 			&rm.CreatedAt,
 			&rm.UpdatedAt,
 		)
