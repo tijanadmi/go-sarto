@@ -1,0 +1,15 @@
+create_table("rooms") {
+  t.Column("id", "integer", {primary: true})
+  t.Column("room_name_sr", "string", {})
+  t.Column("room_name_en", "string", {})
+  t.Column("room_name_bg", "string", {})
+  t.Column("room_short_des_sr", "string", {})
+  t.Column("room_short_des_en", "string", {})
+  t.Column("room_short_des_bg", "string", {})
+  t.Column("room_description_sr", "string", {})
+  t.Column("room_description_en", "string", {})
+  t.Column("room_description_bg", "string", {})
+  t.Column("room_pictures_folder", "string", {})
+  t.Column("room_guest_number", "integer", {})
+  t.Column("room_price_en", "integer", {})
+}

@@ -1,0 +1,6 @@
+create_table("restrictions") {
+  t.Column("id", "integer", {primary: true})
+  t.Column("restriction_name_sr", "string", {})
+  t.Column("restriction_name_en", "string", {})
+  t.Column("restriction_name_bg", "string", {})
+}
