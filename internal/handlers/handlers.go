@@ -80,6 +80,47 @@ func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "majors.page.tmpl", &models.TemplateData{})
 }
 
+// Majors is the handler for the majors page
+func (m *Repository) Rooms(w http.ResponseWriter, r *http.Request) {
+	rooms, err := m.DB.AllRooms()
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+	for i,_ :=range rooms{
+		rooms[i].RoomPictureFolder=fmt.Sprintf("/static/images/%s/1.jpg",rooms[i].RoomPictureFolder)
+	}
+	data := make(map[string]interface{})
+	data["rooms"] = rooms
+	log.Println()
+	// send data to the template
+	render.Template(w, r, "rooms.page.tmpl", &models.TemplateData{
+		Data: data,
+	})
+	
+}
+
+// Majors is the handler for the majors page
+func (m *Repository) RoomDetails(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.URL.Query().Get("id"))
+	roomID, _ := strconv.Atoi(r.URL.Query().Get("id"))
+	log.Println(roomID)
+	room, err := m.DB.GetRoomByID(roomID)
+	if err != nil {
+		m.App.Session.Put(r.Context(), "error", "Can't get room from db!")
+		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		return
+	}
+	data := make(map[string]interface{})
+	data["room"] = room
+	
+	// send data to the template
+	render.Template(w, r, "room.page.tmpl", &models.TemplateData{
+		Data: data,
+	})
+	
+}
+
 // Reservation is the handler for the make-reservation page
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 	res, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
@@ -292,16 +333,14 @@ func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 	}
 
 	rooms, err := m.DB.SearchAvailabilityForAllRooms(startDate, endDate)
-	m.App.InfoLog.Println("after call search")
+	
 	if err != nil {
 
 		helpers.ServerError(w, err)
 		return
 	}
 
-	for _, i := range rooms {
-		m.App.InfoLog.Println("ROOM:", i.ID, i.RoomNameEn)
-	}
+	
 
 	if len(rooms) == 0 {
 		//no availability

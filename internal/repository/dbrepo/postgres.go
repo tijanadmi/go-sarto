@@ -3,6 +3,7 @@ package dbrepo
 import (
 	"context"
 	"errors"
+	"fmt"
 	"log"
 	"time"
 
@@ -170,7 +171,7 @@ func (m *postgresDBRepo) GetRoomByID(id int) (models.Room, error) {
 	defer cancel()
 
 	var room models.Room
-
+fmt.Println(id)
 	query := `
 		select r.id,
 		r.room_name_sr,

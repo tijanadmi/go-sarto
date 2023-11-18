@@ -1,15 +1,11 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>Choose a Room</h1>             
-                <div class="container mb-4">
+    <div class="container mb-4">
     <div class="row">
         <div class="col-12">
-            <div class="table-responsive">
-                <table class="table table-striped">
+            <div class="table-responsive-sm">
+                <table class="table table-striped section-rooms">
                     <thead>
                         <tr>
                             <th scope="col"> </th>
@@ -24,15 +20,14 @@
                     {{range $rooms}}
                     
                         <tr>
-                            <td><img src="/static/images/{{.RoomPictureFolder}}/1.jpg" class="img-thumbnail"></td>
+                            <td><img src=.{{.RoomPictureFolder}} class="img-thumbnail"></td>
                             <td align="left"><strong>{{.RoomNameEn}}</strong><br>{{.RoomShortDescEn}}
                             <hr>
-                            {{.RoomDescEn}}
+                            <span class="d-none d-md-inline-block">{{.RoomDescEn}}</span>
                             </td>
                             <td class="text-right">{{.RoomGuestNumber}}</td>
                             <td class="text-right">{{.RoomPriceEn}}  €</td>
-                            <td class="text-right">
-                            <a href="/choose-room/{{.ID}}" class="btn btn-primary">Book now</a>
+                            <td class="text-right"><button type="submit" class="btn btn-secondary">Search Availability</button>
                             <br><br>
                             <a href="/detailsroom/{{.ID}}" class="btn btn-outline-secondary">More Detailes</a>
                              </td>
@@ -45,7 +40,4 @@
     </div>
 </div>
 
-            </div>
-        </div>
-    </div>
 {{end}}

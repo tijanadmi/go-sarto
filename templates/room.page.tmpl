@@ -4,20 +4,17 @@
     <div class="container">
 	<div class="row">
             <div class="col">
-                <img src="/static/images/generals-quarters.png"
+                <img src="/static/images/{{.RoomPictureFolder}}/1.jpg"
                      class="img-fluid img-thumbnail mx-auto d-block room-image" alt="room image">
             </div>
       </div>
    <div class="row">
             <div class="col">
-                <h1 class="text-center mt-5">General's Quarters</h1>
+                <h1 class="text-center mt-5">{{.RoomNameEn}}</h1>
                 <p>
-                    Your home away form home, set on the majestic waters of the Atlantic Ocean, this will be a vacation to remember.
-                    Your home away form home, set on the majestic waters of the Atlantic Ocean, this will be a vacation to remember.
-                    Your home away form home, set on the majestic waters of the Atlantic Ocean, this will be a vacation to remember.
-                    Your home away form home, set on the majestic waters of the Atlantic Ocean, this will be a vacation to remember.
-                    Your home away form home, set on the majestic waters of the Atlantic Ocean, this will be a vacation to remember.
-                    Your home away form home, set on the majestic waters of the Atlantic Ocean, this will be a vacation to remember.
+                    <br>{{.RoomShortDescEn}}
+                    <hr>
+                    {{.RoomDescEn}}
                 </p>
             </div>
      </div>
