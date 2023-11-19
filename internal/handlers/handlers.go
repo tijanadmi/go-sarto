@@ -92,7 +92,7 @@ func (m *Repository) Rooms(w http.ResponseWriter, r *http.Request) {
 	}
 	data := make(map[string]interface{})
 	data["rooms"] = rooms
-	log.Println()
+	
 	// send data to the template
 	render.Template(w, r, "rooms.page.tmpl", &models.TemplateData{
 		Data: data,
@@ -102,9 +102,17 @@ func (m *Repository) Rooms(w http.ResponseWriter, r *http.Request) {
 
 // Majors is the handler for the majors page
 func (m *Repository) RoomDetails(w http.ResponseWriter, r *http.Request) {
-	log.Println(r.URL.Query().Get("id"))
-	roomID, _ := strconv.Atoi(r.URL.Query().Get("id"))
-	log.Println(roomID)
+	
+	//roomID, _ := strconv.Atoi(r.URL.Query().Get("id"))
+	id := chi.URLParam(r, "id")
+
+	roomID, err := strconv.Atoi(id)
+	if err != nil {
+		m.App.Session.Put(r.Context(), "error","invalid id parameter")
+		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		return
+	}
+	
 	room, err := m.DB.GetRoomByID(roomID)
 	if err != nil {
 		m.App.Session.Put(r.Context(), "error", "Can't get room from db!")

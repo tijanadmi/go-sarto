@@ -1,7 +1,7 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container">
+    <div class="container container-fluid">
         <div class="row">
             <div class="col">
                 <h1>Choose a Room</h1>             
@@ -13,9 +13,7 @@
                     <thead>
                         <tr>
                             <th scope="col"> </th>
-                            <th scope="col">Room Name</th>
-                            <th scope="col" class="text-center">Number of guests</th>
-                            <th scope="col" class="text-right">Price</th>
+                            <th scope="col"></th>
                             <th> </th>
                         </tr>
                     </thead>
@@ -24,17 +22,18 @@
                     {{range $rooms}}
                     
                         <tr>
-                            <td><img src="/static/images/{{.RoomPictureFolder}}/1.jpg" class="img-thumbnail"></td>
+                            <td><img src="/static/images/{{.RoomPictureFolder}}/1.jpg" class="img-fluid mt-3"></td>
                             <td align="left"><strong>{{.RoomNameEn}}</strong><br>{{.RoomShortDescEn}}
-                            <hr>
-                            {{.RoomDescEn}}
-                            </td>
-                            <td class="text-right">{{.RoomGuestNumber}}</td>
-                            <td class="text-right">{{.RoomPriceEn}}  €</td>
-                            <td class="text-right">
-                            <a href="/choose-room/{{.ID}}" class="btn btn-primary">Book now</a>
+                            
+                            <span class="d-none d-md-inline-block"><hr>{{.RoomDescEn}}</span>
                             <br><br>
-                            <a href="/detailsroom/{{.ID}}" class="btn btn-outline-secondary">More Detailes</a>
+                            <span class="d-none d-md-inline-block"><strong>Number of guests: {{.RoomGuestNumber}}</strong></span><br>
+                            <span class="d-none d-md-inline-block"><strong>Price: {{.RoomPriceEn}}  €</strong></span>
+                            </td>
+                            <td class="text-right  mt-3">
+                            <a href="/choose-room/{{.ID}}" class="btn btn-primary btn-custom">Book now</a>
+                            <br><br>
+                            <a href="/room_details/{{.ID}}" class="btn btn-outline-secondary btn-custom">More Detailes</a>
                              </td>
                         </tr>
                     {{end}}   

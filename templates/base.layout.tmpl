@@ -85,7 +85,7 @@ p.n1 {
 font-family: "Ubuntu";
     font-weight: bold;
   /*font-size: rfs-fluid-value(4rem);*/
-   font-size: 8vh;
+   font-size: 7vh;
   color:#fff;
 }
 p.n2 {
@@ -98,6 +98,10 @@ p.n2 {
 p.w {
   font-size: 2vh;
   color:#fff;
+}
+p.mr {
+  font-size: 2vh;
+  padding: 5px 0 5px 0;
 }
 
 
@@ -185,6 +189,27 @@ p.w {
      }
 
 
+        /* Custom styles go here */
+        @media (max-width: 767px) {
+            /* Styles for small screens (mobile) */
+            .btn-custom {
+                font-size: 10px; /* Adjust the font size for mobile */
+                max-width: 70px;
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+
+        @media (min-width: 768px) {
+            /* Styles for larger screens (laptop and above) */
+            .btn-custom {
+                font-size: 16px; /* Adjust the font size for larger screens */
+                width: 100%; /* Set the initial width to 100% */
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+  
      
   </style>
     
@@ -216,7 +241,7 @@ p.w {
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-    <div class="collapse navbar-collapse" id="navbarText">
+    <div class="collapse navbar-collapse align-items-right" id="navbarText">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>

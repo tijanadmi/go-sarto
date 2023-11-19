@@ -22,11 +22,16 @@ func listenForMail() {
 
 func sendMsg(m models.MailData) {
 	server := mail.NewSMTPClient()
-	server.Host = "localhost"
-	server.Port = 1025
+	server.Host = ""
+	server.Port = 587
+	server.Username = ""
+	server.Password = "" // Generate an app password in your Yahoo account settings
 	server.KeepAlive = false
 	server.ConnectTimeout = 10 * time.Second
 	server.SendTimeout = 10 * time.Second
+
+	// Enable STARTTLS for a secure connection
+	server.Encryption = mail.EncryptionSTARTTLS 
 
 	client, err := server.Connect()
 	if err != nil {

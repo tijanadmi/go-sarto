@@ -1,18 +1,17 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container mb-4">
-    <div class="row">
+   <div class="container mb-4 container-fluid">
+   <h1>Choose a Room</h1>
+    <div class="row">  
         <div class="col-12">
             <div class="table-responsive-sm">
                 <table class="table table-striped section-rooms">
                     <thead>
                         <tr>
                             <th scope="col"> </th>
-                            <th scope="col">Room Name</th>
-                            <th scope="col" class="text-center">Number of guests</th>
-                            <th scope="col" class="text-right">Price</th>
-                            <th> </th>
+                            <th scope="col"></th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -20,17 +19,21 @@
                     {{range $rooms}}
                     
                         <tr>
-                            <td><img src=.{{.RoomPictureFolder}} class="img-thumbnail"></td>
-                            <td align="left"><strong>{{.RoomNameEn}}</strong><br>{{.RoomShortDescEn}}
-                            <hr>
-                            <span class="d-none d-md-inline-block">{{.RoomDescEn}}</span>
+                            <td>
+                               <a href="/room_details/{{.ID}}">
+                                <img src=.{{.RoomPictureFolder}} class="img-fluid mt-3">
+                               </a> 
                             </td>
-                            <td class="text-right">{{.RoomGuestNumber}}</td>
-                            <td class="text-right">{{.RoomPriceEn}}  €</td>
-                            <td class="text-right"><button type="submit" class="btn btn-secondary">Search Availability</button>
+
+                            <td align="left"><strong>
+                                <a href="/room_details/{{.ID}}">{{.RoomNameEn}}</a></strong><br>{{.RoomShortDescEn}}
+                            
+                            <span class="d-none d-md-inline-block"><hr>{{.RoomDescEn}}</span>
                             <br><br>
-                            <a href="/detailsroom/{{.ID}}" class="btn btn-outline-secondary">More Detailes</a>
-                             </td>
+                            <span class="d-none d-md-inline-block"><strong>Number of guests: {{.RoomGuestNumber}}</strong></span><br>
+                            <span class="d-none d-md-inline-block"><strong>Price: {{.RoomPriceEn}}  €</strong></span>
+                            </td>
+                            
                         </tr>
                     {{end}}   
                     </tbody>
