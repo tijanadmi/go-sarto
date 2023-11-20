@@ -87,7 +87,7 @@ func (m *Repository) Rooms(w http.ResponseWriter, r *http.Request) {
 		helpers.ServerError(w, err)
 		return
 	}
-	for i,_ :=range rooms{
+	for i :=range rooms{
 		rooms[i].RoomPictureFolder=fmt.Sprintf("/static/images/%s/1.jpg",rooms[i].RoomPictureFolder)
 	}
 	data := make(map[string]interface{})
@@ -260,10 +260,10 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	//send notifications - first to guest
 
 	htmlMassage := fmt.Sprintf(`
-		<strong>Reservation Confirmation</strong><br>
-		Dear %s:, <br>
+		<strong>Reservation Confirmation</strong><br><br>
+		Dear %s: <br><br>
 		This is confirm your reservation from %s to %s.
-	`, reservation.FirstName, reservation.StartDate.Format("01.02.2006"), reservation.EndDate.Format("01.02.2006"))
+	`, reservation.FirstName, reservation.StartDate.Format("02.01.2006"), reservation.EndDate.Format("02.01.2006"))
 	msg := models.MailData{
 		To:       reservation.Email,
 		From:     "me@here.co",
@@ -277,11 +277,11 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	//send notifications - first to owner
 
 	htmlMassage = fmt.Sprintf(`
-		<strong>Reservation Notification</strong><br>
+		<strong>Reservation Notification</strong><br><br>
 		Reservation has been made for %s to %s.
-	`, reservation.StartDate.Format("01.02.2006"), reservation.EndDate.Format("01.02.2006"))
+	`, reservation.StartDate.Format("02.01.2006"), reservation.EndDate.Format("02.01.2006"))
 	msg = models.MailData{
-		To:      "me@here.co",
+		To:      "tijanadmi@yahoo",
 		From:    "me@here.co",
 		Subject: "Reservation Notification",
 		Content: htmlMassage,
@@ -876,7 +876,7 @@ func (m *Repository) AdminPostReservationsCalendar(w http.ResponseWriter, r *htt
 	}
 
 	// now handle new blocks
-	for name, _ := range r.PostForm {
+	for name := range r.PostForm {
 		if strings.HasPrefix(name, "add_block") {
 			exploded := strings.Split(name, "_")
 			roomID, _ := strconv.Atoi(exploded[2])

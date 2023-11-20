@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"strconv"
 	"strings"
 	"time"
 
@@ -22,10 +23,14 @@ func listenForMail() {
 
 func sendMsg(m models.MailData) {
 	server := mail.NewSMTPClient()
-	server.Host = ""
-	server.Port = 587
-	server.Username = ""
-	server.Password = "" // Generate an app password in your Yahoo account settings
+	server.Host = app.MailServer.Host
+	a, e := strconv.Atoi(app.MailServer.PortNumber) 
+    if e == nil { 
+        fmt.Printf("%T \n %v", a, a) 
+    }
+	server.Port = a
+	server.Username = app.MailServer.Username
+	server.Password = app.MailServer.Password 
 	server.KeepAlive = false
 	server.ConnectTimeout = 10 * time.Second
 	server.SendTimeout = 10 * time.Second

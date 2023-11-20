@@ -54,7 +54,7 @@ func main() {
 		log.Println(err)
 	}*/
 
-	fmt.Println(fmt.Sprintf("Staring application on port %s", portNumber))
+	fmt.Printf(fmt.Sprintf("Staring application on port %s", portNumber))
 
 	srv := &http.Server{
 		Addr:    portNumber,
@@ -84,6 +84,11 @@ func run() (*driver.DB, error) {
 	dbPass := flag.String("dbpass", "", "Database password")
 	dbPort := flag.String("dbport", "5432", "Database port")
 	dbSSL := flag.String("dbssl", "disable", "Database ssl settings (disable, prefer, require)")
+	// set MailServer Settings
+	flag.StringVar(&app.MailServer.Host, "mshost", "", "MailServer Host")
+	flag.StringVar(&app.MailServer.PortNumber, "msport", "", "MailServer Port")
+	flag.StringVar(&app.MailServer.Username, "msusername", "", "MailServer Host Username")
+	flag.StringVar(&app.MailServer.Password, "mspassword", "", "MailServer Host Password")
 
 	flag.Parse()
 

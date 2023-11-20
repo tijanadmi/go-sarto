@@ -9,6 +9,15 @@ import (
 )
 
 // AppConfig holds the application config
+
+type MailServer struct{
+	Host string
+	PortNumber  string
+	Username string
+	Password string
+
+}
+
 type AppConfig struct {
 	UseCache      bool
 	TemplateCache map[string]*template.Template
@@ -17,4 +26,5 @@ type AppConfig struct {
 	InProduction  bool
 	Session       *scs.SessionManager
 	MailChan      chan models.MailData
+	MailServer MailServer
 }
