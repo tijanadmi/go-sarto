@@ -1,22 +1,121 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="row featurette" style="padding: 3%">
-        <div class="col-md-5" align="left" style="padding: 0 5% 5% 5%">
-            <h1>Contact Us </h1>
-            <hr>
-            <p>Smederevski put 25b<br>
-                11130 BELGRADE<br>
-                SRBIJA</p>
-                <p>Primary phone for English: +381 69 1991307<br>
-                Phone: +381113472565<br>
-                Mob/Viber: +381 65 477 0 774</p>
+ <!-- ======= Hero Section ======= -->
+  <section id="" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+      <div class="row">
+        <div class="col-lg-8">
         </div>
-         <div class="col-md-5" align="center">          
-            <div class="mapouter"><div class="gmap_canvas"><iframe src="https://maps.google.com/maps?q=serbia%20belgrade%20%20Smederevski%20Put%2025a&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" style="width: 550px; height: 550px;"></iframe><style>.mapouter{position:relative;height:550px;width:550px;background:#fff;} .maprouter a{color:#fff !important;position:absolute !important;top:0 !important;z-index:0 !important;}</style><a href="https://blooketjoin.org">blooket join</a><style>.gmap_canvas{overflow:hidden;height:550px;width:550px}.gmap_canvas iframe{position:relative;z-index:2}</style></div></div>
-            <br>
-            <small><a style="color: #0000ff; text-align: left;" href="http://maps.google.com/maps?f=d&amp;source=embed&amp;saddr=44.771757,20.555777&amp;daddr=&amp;hl=en&amp;geocode=&amp;sll=44.771679,20.555905&amp;sspn=0.001053,0.002642&amp;vpsrc=6&amp;mra=mift&amp;mrsp=0&amp;sz=19&amp;ie=UTF8&amp;t=h&amp;ll=44.787683,20.482635&amp;spn=0.170565,0.291824&amp;z=11">View Larger Map</a></small></p>
-          
-        </div>
+
+      </div>
     </div>
+  </section><!-- End Hero -->
+
+    <main id="main">
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <br>
+          <p>Contact Us</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up">
+        <iframe style="border:0; width: 100%; height: 350px;" src="https://maps.google.com/maps?q=serbia%20belgrade%20%20Smederevski%20Put%2025a&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row mt-5">
+
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p><a href="http://maps.google.com/maps?f=d&amp;source=embed&amp;saddr=44.771757,20.555777&amp;daddr=&amp;hl=en&amp;geocode=&amp;sll=44.771679,20.555905&amp;sspn=0.001053,0.002642&amp;vpsrc=6&amp;mra=mift&amp;mrsp=0&amp;sz=19&amp;ie=UTF8&amp;t=h&amp;ll=44.787683,20.482635&amp;spn=0.170565,0.291824&amp;z=11">Smederevski put 25b,</a></p>
+                <p><a href="http://maps.google.com/maps?f=d&amp;source=embed&amp;saddr=44.771757,20.555777&amp;daddr=&amp;hl=en&amp;geocode=&amp;sll=44.771679,20.555905&amp;sspn=0.001053,0.002642&amp;vpsrc=6&amp;mra=mift&amp;mrsp=0&amp;sz=19&amp;ie=UTF8&amp;t=h&amp;ll=44.787683,20.482635&amp;spn=0.170565,0.291824&amp;z=11">11130 Belgrade, Serbia</a></p>
+              </div>
+
+              <div class="open-hours">
+                <i class="bi bi-clock"></i>
+                <h4>Open Hours:</h4>
+                <p>
+                  Monday-Saturday:<br>
+                  11:00 AM - 23:00 PM
+                </p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>tijanadmi@yahoo.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+381 11 347 2 565</p>
+                <p>+381 65 477 0 774</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form action="/contact" method="post" class="php-email-form" novalidate>
+              <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="name"></label>
+                        {{with .Form.Errors.Get "name"}}
+                            <label class="text-danger">{{.}}</label>
+                        {{end}}
+                  <input type="text" name="name" class="form-control {{with .Form.Errors.Get "name"}} is-invalid {{end}}" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <label for="email"></label>
+                        {{with .Form.Errors.Get "email"}}
+                            <label class="text-danger">{{.}}</label>
+                        {{end}}
+                  <input type="email" class="form-control {{with .Form.Errors.Get "email"}} is-invalid {{end}}" name="email" id="email" placeholder="Your Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <label for="subject"></label>
+                        {{with .Form.Errors.Get "subject"}}
+                            <label class="text-danger">{{.}}</label>
+                        {{end}}
+                <input type="text" class="form-control {{with .Form.Errors.Get "subject"}} is-invalid {{end}}" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="message"></label>
+                        {{with .Form.Errors.Get "message"}}
+                            <label class="text-danger">{{.}}</label>
+                        {{end}}
+                <textarea class="form-control {{with .Form.Errors.Get "message"}} is-invalid {{end}}" name="message" rows="8" placeholder="Message" required></textarea>
+              </div>
+              <div class="my-3">
+                
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+              <div class="text-center"><br></div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+ 
+
+  </main><!-- End #main -->
+
 {{end}}

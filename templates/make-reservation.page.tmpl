@@ -1,28 +1,40 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container">
-		
-   <div class="row justify-content-center align-items-center">
+
+<!-- ======= Hero Section ======= -->
+  <section id="" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+      <div class="row">
+        <div class="col-lg-8">
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+    <main id="main">
+    <!-- ======= Make a Reservation Section ======= -->
+    <section id="reservation" class="reservation d-flex align-items-center">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
+
+                <!-- ======= Form Begin ======= -->
+            <div class="row justify-content-center align-items-center">
             <div class="col-md-6">
                 {{$res := index .Data "reservation"}}
                 <h1 class="text-center mt-5">Make reservation</h1>
                 <p class="mr"><strong>Reservation Details:</strong><br>
                 <strong>Room:</strong> {{$res.Room.RoomNameEn}}<br>
                 <strong>Arrival:</strong> {{index .StringMap "start_date"}}<br>
-                <strong>Departure:</strong> {{index .StringMap "end_date"}}
-                
+                <strong>Departure:</strong> {{index .StringMap "end_date"}}              
                 </p>
-
-                
-
-                 <form action="" method="post" class="" novalidate>
+                 <form action="" method="post" class="reservation-form" novalidate>
                     <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
                     <input type="hidden" name="start_date" value="{{index .StringMap "start_date"}}">
                     <input type="hidden" name="end_date" value="{{index .StringMap "end_date"}}">
                     <input type="hidden" name="room_id" value="{{$res.RoomID}}">
-                    
-                    <div class="form-group m-5 mb-5">
+
+                    <div class="form-group m-3">
                         <label for="first_name">First name:</label>
                         {{with .Form.Errors.Get "first_name"}}
                             <label class="text-danger">{{.}}</label>
@@ -30,24 +42,20 @@
 
                         <input type="text" class="form-control {{with .Form.Errors.Get "first_name"}} is-invalid {{end}}"
                             id="first_name" 
-                            name="first_name" value="{{$res.FirstName}}" required autocomplete="off">
-                        
+                            name="first_name" value="{{$res.FirstName}}" required autocomplete="off">                       
                     </div>
-                    <div class="form-group m-5">
+
+                    <div class="form-group m-3">
                         <label for="last_name">Last name:</label>
                         {{with .Form.Errors.Get "last_name"}}
                             <label class="text-danger">{{.}}</label>
                         {{end}}
                         <input type="text" class="form-control {{with .Form.Errors.Get "last_name"}} is-invalid {{end}}" 
                         id="last_name" 
-                        name="last_name" value="{{$res.LastName}}" required autocomplete="off">
-                        
+                        name="last_name" value="{{$res.LastName}}" required autocomplete="off">                       
                     </div>
                     
-
-                    
-
-                    <div class="form-group m-5">
+                    <div class="form-group m-3">
                         <label for="email">Email:</label>
                         {{with .Form.Errors.Get "email"}}
                             <label class="text-danger">{{.}}</label>
@@ -56,7 +64,7 @@
                         id="email" name="email" value="{{$res.Email}}" required autocomplete="off">
                         
                     </div>
-                    <div class="form-group m-5">
+                    <div class="form-group m-3">
                         <label for="phone">Phone number:</label>
                         {{with .Form.Errors.Get "phone"}}
                             <label class="text-danger">{{.}}</label>
@@ -65,15 +73,15 @@
                         id="phone" name="phone" value="{{$res.Phone}}" required autocomplete="off">
                         
                     </div>
-                    <hr>
-
-                    <input type="submit" class="btn btn-success btn-lg success-button" value="Make Reservation">
-              
-            
+                    <div class="text-center"><button type="submit">Make Reservation</button></div>
                 </form>
             </div>
      </div>
-	 
-		
-</div>	
+	
+                <!-- ======= Form End ======= -->
+        </div>
+         </section><!-- End Reservation Section -->
+ 
+  </main><!-- End #main -->
+
 {{end}}

@@ -22,6 +22,7 @@ func listenForMail() {
 }
 
 func sendMsg(m models.MailData) {
+	
 	server := mail.NewSMTPClient()
 	server.Host = app.MailServer.Host
 	a, e := strconv.Atoi(app.MailServer.PortNumber) 
@@ -48,6 +49,7 @@ func sendMsg(m models.MailData) {
 
 	if m.Template == "" {
 		email.SetBody(mail.TextHTML, m.Content)
+		
 
 	} else {
 		data, err := ioutil.ReadFile(fmt.Sprintf("./email-templates/%s", m.Template))
@@ -58,6 +60,7 @@ func sendMsg(m models.MailData) {
 		mailTemplate := string(data)
 		msgToSend := strings.Replace(mailTemplate, "[%body%]", m.Content, 1)
 		email.SetBody(mail.TextHTML, msgToSend)
+		
 	}
 
 	/*email.SetBody(mail.TextHTML, string(m.Content))*/

@@ -1,266 +1,123 @@
 {{define "base"}}
-    <!DOCTYPE html>
-    <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hotel Villa Sarto</title>
 
-    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hotel, Villa Sarto</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/static/public/assets/img/favicon.png" rel="icon">
+    <!--<link href="/static/public/assets/img/apple-touch-icon.png" rel="apple-touch-icon">-->
 
     <!-- Google Fonts -->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,500;0,600;0,900;1,100;1,200;1,300;1,500&family=Ubuntu:wght@300&display=swap" rel="stylesheet"> 
-    <!-- CSS Stylesheets -->
-      <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-    
-    <!-- Bootstrap Scripts -->
+    <!-- Vendor CSS Files -->
+    <link href="/static/public/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="/static/public/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/static/public/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/public/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/public/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/static/public/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/static/public/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        
-    
+    <!-- Vanila Datepicker -->
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker.min.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker-bs5.min.css">
+    <!-- notie Alert -->
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
-  
-  <style>
+    
+    <!-- SweetAlert-->
+    <link rel="stylesheet" href="@sweetalert2/themes/dark/dark.css">
+    
 
-    body {
-      font-family: "Montserrat";
-      text-align: center;
-    }
-    h1, h2, h3, h4, h5, h6 {
-    font-family: "Montserrat-Bold";
-}
-    /* Containers  */
+   
+    
+    <!-- Template Main CSS File -->
+    <link href="/static/public/assets/css/style.css" rel="stylesheet">
 
-.container-fluid{
-    padding: 2% 3%;
-}
+     <!-- TBase CSS File -->
+    <link href="/static/css/style.css" rel="stylesheet">
 
-
-
-/* Sections  */
-.colored-section {
-    background-color: #35bd62;
-    color:#fff;
-}
-
-.white-section {
-    background-color: #fff;
-}
-
-.section-heading {
-    font-size:rfs-fluid-value(1.125rem);
-    background-color:#dd1b1b;
-    color:#fff;
-    margin: 0;
-    padding: 0;
-}
-.aheader {
-    font-size:100%;
-    background-color:transparent;
-    color:#fff;
-    padding: 0.5rem 1rem 0 1rem;
-}
-
-.section-rooms {
-    font-size:1.5vh;
-}
-
-
-/* Navigation Bar */
-
-.navbar {
-    padding: 0 0 0rem;
-}
-.navbar-brand{
-    font-family: "Ubuntu";
-    font-weight: bold;
-}
-p.n1 {
-font-family: "Ubuntu";
-    font-weight: bold;
-  /*font-size: rfs-fluid-value(4rem);*/
-   font-size: 7vh;
-  color:#fff;
-}
-p.n2 {
-  font-family: "Ubuntu";
-  font-weight: bold;
-  font-size: 2.5vh;
-  color:#fff;
-}
-
-p.w {
-  font-size: 2vh;
-  color:#fff;
-}
-p.mr {
-  font-size: 2vh;
-  padding: 5px 0 5px 0;
-}
-
-
-.nav-item {
-    padding: 0 5px;
-}
-
-.nav-link{
-    font-size: 1.5rem;
-    font-family: "Montserrat-Light";
-    font-weight: bold;
-}
-
-/* Download Button */
-
-.success-button {
-    font-family: "Ubuntu";
-     font-weight: bold;
-    font-size: 2.5vh;
-}
-
-.responsive-button {
-    font-family: "Ubuntu";
-    font-weight: bold;
-    font-size: 2.5vh;
-    background-color: #636060; 
-    color: #ffffff;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s; 
-}
-
-.download-button{
-    margin: 5% 3% 5% 0%;
-}
-
-/* Buttons */
-
-.button{
-    margin: 5% 3% 5% 0%;
-}
-
-#testimonials {
-    background-color: #fff;
-}
-
-.testimonial-text {
-    font-size: 3rem;
-    line-height: 1.5;
-}
-
-.testimonial-image {
-    width: 60%;
-    padding: 3% 0 3% 0;
-}
-
-/* Footer section */
-
-  #footer {
-      background-color: #fff;
-      color: #000;
-  }
-  .social-icon {
-      margin: 20px 10px;
-  }
-
-  .room-image {
-    max-width: 50%;
-  }
-  /* override styles here */
-.notie-container {
+    <style>
+    .notie-container {
+  opacity: 1 !important;
   box-shadow: none;
 }
-.datepicker {
-        z-index: 10000;
-    }
-.search-form {
-        max-width: 95%;
-     }
 
+.notie-background-success {
+  opacity: 1 !important;
+  background-color: #128312;
+  z-index: 999 !important; }
 
-        /* Custom styles go here */
-        @media (max-width: 767px) {
-            /* Styles for small screens (mobile) */
-            .btn-custom {
-                font-size: 10px; /* Adjust the font size for mobile */
-                max-width: 70px;
-                width: 100%;
-                margin: 0 auto;
-            }
-        }
+.notie-background-warning {
+  opacity: 1 !important;
+  background-color: #b9780f;
+  z-index: 999 !important; }
 
-        @media (min-width: 768px) {
-            /* Styles for larger screens (laptop and above) */
-            .btn-custom {
-                font-size: 16px; /* Adjust the font size for larger screens */
-                width: 100%; /* Set the initial width to 100% */
-                max-width: 300px;
-                margin: 0 auto;
-            }
-        }
-  
-     
+.notie-background-error {
+  opacity: 1 !important;
+  background-color: #8f1d06;
+  z-index: 999 !important; }
+
+.notie-background-info {
+  background-color: #093172; }
+
+.notie-background-neutral {
+  background-color: #838282; }
+
+.notie-background-overlay {
+  background-color: #FFFFFF; }
   </style>
     
-  </head>
+    {{block "css" .}}
 
-  <body>
-    <div class="d-flex flex-column flex-md-row align-items-center px-md-4  section-heading">
-      <span class="aheader">25b Smederevski Put Zvezdara, 11130 Belgrade, Serbia</span>
-      <div class="col">  </div>
-      <nav class="my-2 my-md-0 mr-md-3">
-       <div class="col justify-content-right"> 
-          <a href="mailto:tijanadmi@yahoo.com" class="aheader"><i class="social-icon fa-solid fa-envelope"></i> <span class="d-none d-md-inline-block">tijanadmi@yahoo.com</span></a>
-          <a href="tel:+381113472565" class="aheader"><i class="fa-solid fa-phone"></i> <span class="d-none d-md-inline-block">(+381) 113472 565</span></a>  
-          <a href="#" class="aheader"><i class="social-icon fa-brands fa-twitter"></i> <span class="d-none d-md-inline-block">Twitter</span></a>
-          <a href="#" class="aheader"><i class="social-icon fa-brands fa-facebook"></i> <span class="d-none d-md-inline-block">Facebook</span></a>
-     </div>
-      </nav>
-    </div>
-
-<section class="colored-section" id="title">
-      <div class="container-fluid" style="padding: 0 2% 0 2%">     
-        <nav class="navbar navbar-expand-lg navbar-dark">
-          <div class="container-fluid" style="padding: 0">
-            <span class="navbar-text">
-                <p class="n1">Hotel Villa Sarto</p>
-                <p class="n2">…where guests always return!</p>
-            </span>
+    {{end}}
     
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-    <div class="collapse navbar-collapse align-items-right" id="navbarText">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/about">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/rooms">Rooms</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/search-availability">Book Now</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/contact">Contact</a>
-              </li> 
-              <li class="nav-item">
+  
+  </head>
+ <body>
+
+    <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-phone d-flex align-items-center"><span>+381 11 347 2 565</span></i>
+        <i class="bi bi-clock d-flex align-items-center ms-4"><span> Mon-Sat: 00AM - 24PM</span></i>
+      </div>
+
+      <div class="languages d-none d-md-flex align-items-center">
+        <ul>
+          <li>En</li>
+          <li><a href="#">Sr</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+    <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-cente">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+    <h1 class="logo me-auto me-lg-0"><a href="/">Sarto</a></h1>
+    <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="/static/public/assets/img/HotelSarto0c0b09.png" alt="" class="img-fluid"></a>-->
+
+          <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/rooms">Rooms</a></li>
+          <li class="nav-item"><a class="nav-link" href="/search-availability">Book Now</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li> 
+          <li class="nav-item">
             {{if eq .IsAuthenticated 1}}
-                        <li class="nav-item dropdown">
+            <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Admin
@@ -278,46 +135,119 @@ p.mr {
               <a class="nav-link" href="/user/login">Login</a>
             {{end}}
             </li>
-              </ul>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+     
+
     </div>
-  </div>
-</nav>
- </div>
+  </header><!-- End Header -->
 
- </section>
   
-    {{block "content" .}}
 
-    {{end}}
+        {{block "content" .}}
 
+        {{end}}
 
- <!-- Footer -->
+  
+  
 
-  <footer class="white-section" id="footer">
-    <div class="container-fluid">
-    <i class="social-icon fa-brands fa-twitter"></i>
-    <i class="social-icon fa-brands fa-facebook"></i>
-    <i class="social-icon fa-brands fa-instagram"></i>
-    <i class="social-icon fa-solid fa-envelope"></i>
+    <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>Hotel Villa Sarto</h3>
+              <p>
+                Smederevski put 25b <br>
+                11130 BELGRADE, SERBIA<br><br>
+                <strong>Phone:</strong> +381 11 347 2 565<br>
+                <strong>Mob/Viber:</strong> +381 65 477 0 774<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/about">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/rooms">Rooms</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/search-availability">Book now</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/contact">Contact</a></li>
+            </ul>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Hotel Villa Sarto</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="/">TDIspaces</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <!-- Vendor JS Files -->
     
-    <p>© Copyright TDI</p>
-  </div>
-  </footer>
+    <script src="/static/public/assets/vendor/aos/aos.js"></script>
+    <script src="/static/public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/public/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/static/public/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/static/public/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- <script src="/static/public/assets/vendor/php-email-form/validate.js"></script> -->
 
-  <!-- Font Awesome -->
-        <script src="https://kit.fontawesome.com/6690a6eb7b.js" crossorigin="anonymous"></script>
+    
+   
+   <!-- Vanila Datepicker -->
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        
-    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/datepicker-full.min.js"></script>
-  <script src="https://unpkg.com/notie"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="/static/js/app.js"></script>
-  
+    <!-- Notie -->
+    <script src="https://unpkg.com/notie"></script>
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="sweetalert2/dist/sweetalert2.min.js"></script>-->
+
+    <!-- Template Main JS File -->
+    <script src="/static/public/assets/js/main.js"></script>
+
+    <!-- Basic JS File -->
+    <script src="/static/js/app.js"></script>
+
     {{block "js" .}}
 
     {{end}}
-    <script>
+
+
+   <script>
 
   let attention = Prompt();
 (() => {
@@ -369,13 +299,10 @@ notify("{{.}}","success")
 notify("{{.}}","warning")
 {{end}}
 
- 
   </script>
 
-
- 
+    
   </body>
-
-  
 </html>
+
 {{end}}

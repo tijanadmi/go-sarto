@@ -1,4 +1,33 @@
 
+/* After notie styles are applied to DOM: */
+.notie-container {
+  opacity: 1 !important;
+  box-shadow: none;
+}
+
+.notie-background-success {
+  opacity: 1 !important;
+  background-color: #128312;
+  z-index: 999 !important; }
+
+.notie-background-warning {
+  opacity: 1 !important;
+  background-color: #b9780f;
+  z-index: 999 !important; }
+
+.notie-background-error {
+  opacity: 1 !important;
+  background-color: #8f1d06;
+  z-index: 999 !important; }
+
+.notie-background-info {
+  background-color: #093172; }
+
+.notie-background-neutral {
+  background-color: #838282; }
+
+.notie-background-overlay {
+  background-color: #FFFFFF; }
 
 .my-footer {
   /*height: 10em;*/
@@ -11,13 +40,19 @@
 .room-image {
   max-width: 50%;
 }
+/* override styles here for notie alert */
 /* override styles here */
-.notie-container {
-box-shadow: none;
-}
 .datepicker {
       z-index: 10000;
   }
+ .datepicker .datepicker-cell.day {
+    color: black !important;
+  }
+
+.notie-container{
+    box-shadow: none;
+}
+  
 .search-form {
       max-width: 95%;
    }

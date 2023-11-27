@@ -1,46 +1,92 @@
 {{template "base" .}}
 
 {{define "content"}}
-   <div class="container mb-4 container-fluid">
-   <h1>Choose a Room</h1>
-    <div class="row">  
-        <div class="col-12">
-            <div class="table-responsive-sm">
-                <table class="table table-striped section-rooms">
-                    <thead>
-                        <tr>
-                            <th scope="col"> </th>
-                            <th scope="col"></th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {{$rooms := index .Data "rooms"}}
-                    {{range $rooms}}
-                    
-                        <tr>
-                            <td>
-                               <a href="/room_details/{{.ID}}">
-                                <img src=.{{.RoomPictureFolder}} class="img-fluid mt-3">
-                               </a> 
-                            </td>
-
-                            <td align="left"><strong>
-                                <a href="/room_details/{{.ID}}">{{.RoomNameEn}}</a></strong><br>{{.RoomShortDescEn}}
-                            
-                            <span class="d-none d-md-inline-block"><hr>{{.RoomDescEn}}</span>
-                            <br><br>
-                            <span class="d-none d-md-inline-block"><strong>Number of guests: {{.RoomGuestNumber}}</strong></span><br>
-                            <span class="d-none d-md-inline-block"><strong>Price: {{.RoomPriceEn}}  €</strong></span>
-                            </td>
-                            
-                        </tr>
-                    {{end}}   
-                    </tbody>
-                </table>
-            </div>
+ <!-- ======= Hero Section ======= -->
+  <section id="" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+      <div class="row">
+        <div class="col-lg-8">
         </div>
+
+      </div>
     </div>
-</div>
+  </section><!-- End Hero -->
+
+    <main id="main">
+
+    <!-- ======= Chefs Section ======= -->
+    {{$rooms := index .Data "rooms"}}
+    <section id="chefs" class="chefs chefs_section">
+      <div class="container" data-aos="fade-up">
+       <div class="section-title">
+        <br>
+          <p>Choose a Room</p>
+        </div>
+
+        <div class="row">
+
+        {{range $rooms}}
+        {{if and (gt .ID 0) (lt .ID 4)}}
+          <div class="col-lg-4 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+            <a href="/room_details/{{.ID}}">
+              <img src=.{{.RoomPictureFolder}} class="img-fluid" alt="">
+            </a>
+              <div class="member-info">
+                <div class="member-info-content">
+                <a href="/room_details/{{.ID}}">
+                  <h4>{{.RoomNameEn}}</h4>
+                </a>
+                <a href="/room_details/{{.ID}}">
+                  <span>Number of guests: {{.RoomGuestNumber}}</span>
+                </a>
+                <a href="/room_details/{{.ID}}">
+                  <span>Price: {{.RoomPriceEn}}  €</span>
+                </a>
+                </div>
+              </div>
+            </div> 
+          </div>
+        
+
+         {{end}}
+        {{end}}
+        </div>
+
+        <div class="row">
+
+        {{range $rooms}}
+        {{if and (gt .ID 3) (lt .ID 6)}}
+          <div class="col-lg-4 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+            <a href="/room_details/{{.ID}}">
+              <img src=.{{.RoomPictureFolder}} class="img-fluid room-img" alt="">
+               </a>
+              <div class="member-info">
+                <div class="member-info-content">
+                <a href="/room_details/{{.ID}}">
+                  <h4>{{.RoomNameEn}}</h4>
+                </a>
+                <a href="/room_details/{{.ID}}">
+                  <span>Number of guests: {{.RoomGuestNumber}}</span>
+                </a>
+                <a href="/room_details/{{.ID}}">  
+                  <span>Price: {{.RoomPriceEn}}  €</span>
+                </a>  
+                </div>
+              </div>
+            </div> 
+          </div>
+        
+
+         {{end}}
+        {{end}}
+        </div>
+     
+      </div>
+    </section><!-- End Chefs Section -->
+
+  
+  </main><!-- End #main -->
 
 {{end}}

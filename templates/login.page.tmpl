@@ -1,13 +1,18 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container">
-    
 
-        <div class="row justify-content-center align-items-center">
+<!-- ======= Hero Section ======= -->
+  <section id="hero_login" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+    <!-- ======= Book A Table Section ======= -->
+    <section id="book-a-table" class="book-a-table">
+      <div class="row justify-content-center align-items-center">
             <div class="col-md-6">
-                <h1 class="mt-2">Login</h1>
-                <form action="/user/login" method="post" class="" novalidate>
+                <div class="section-login-title">
+                    <p>Login</p>
+                </div>
+                <form action="/user/login" method="post" class="login-form" novalidate>
                     <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
                     <div class="form-group m-5">
                         <label for="email">Email:</label>
@@ -32,11 +37,20 @@
                         
                     </div>
 
-                    <hr>
+                    
                     <br>
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <div class="text-center"><button type="submit">Login</button></div>
                 </form>
             </div>
         </div>
+        </section><!-- End Book A Table Section -->
     </div>
+    
+  </section><!-- End Hero -->
+
+ <main id="main">
+     
+
+</main><!-- End #main -->
+    
 {{end}}

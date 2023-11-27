@@ -1,50 +1,42 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container container-fluid">
-        <div class="row">
-            <div class="col">
-                <h1>Choose a Room</h1>             
-                <div class="container mb-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col"> </th>
-                            <th scope="col"></th>
-                            <th> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {{$rooms := index .Data "rooms"}}
-                    {{range $rooms}}
-                    
-                        <tr>
-                            <td><img src="/static/images/{{.RoomPictureFolder}}/1.jpg" class="img-fluid mt-3"></td>
-                            <td align="left"><strong>{{.RoomNameEn}}</strong><br>{{.RoomShortDescEn}}
-                            
-                            <span class="d-none d-md-inline-block"><hr>{{.RoomDescEn}}</span>
-                            <br><br>
-                            <span class="d-none d-md-inline-block"><strong>Number of guests: {{.RoomGuestNumber}}</strong></span><br>
-                            <span class="d-none d-md-inline-block"><strong>Price: {{.RoomPriceEn}}  €</strong></span>
-                            </td>
-                            <td class="text-right  mt-3">
-                            <a href="/choose-room/{{.ID}}" class="btn btn-primary btn-custom">Book now</a>
-                            <br><br>
-                            <a href="/room_details/{{.ID}}" class="btn btn-outline-secondary btn-custom">More Detailes</a>
-                             </td>
-                        </tr>
-                    {{end}}   
-                    </tbody>
-                </table>
-            </div>
+<!-- ======= Hero Section ======= -->
+  <section id="" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+      <div class="row">
+        <div class="col-lg-8">
         </div>
-    </div>
-</div>
 
-            </div>
-        </div>
+      </div>
     </div>
+  </section><!-- End Hero -->
+  <!-- ======= Choose Section ======= -->
+    <section id="choose" class="choose section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <p>Available Rooms</p>
+        </div>
+        {{$rooms := index .Data "rooms"}}
+        {{range $rooms}}
+        <div class="row choose-container" data-aos="fade-up" data-aos-delay="200">      
+          <div class="col-lg-6 choose-item">
+            <img src="/static/images/{{.RoomPictureFolder}}/1.jpg" class="room-img" alt="">
+            <div class="choose-content">
+              <a href="/room_details/{{.ID}}">{{.RoomNameEn}}</a><span>Price: {{.RoomPriceEn}}  €</span>            
+            </div>
+            <div class="choose-ingredients">
+              Number of guests: {{.RoomGuestNumber}}
+            </div>
+          </div>
+          <div class="col-lg-6 choose-item">
+            <div class="btns">
+                <a href="/choose-room/{{.ID}}" class="btn-menu animated fadeInUp scrollto">Book now</a>
+            </div>
+          </div>
+        </div>
+        {{end}}
+      </div>
+    </section><!-- End Choose Section -->
 {{end}}

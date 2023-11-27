@@ -18,6 +18,7 @@ var functions = template.FuncMap{
 	"humanDate":  HumanDate,
 	"formatDate": FormatDate,
 	"iterate":    Iterate,
+	"iterate2":   Iterate2,
 	"add":        Add,
 }
 
@@ -32,6 +33,16 @@ func Iterate(count int) []int {
 	var i int
 	var items []int
 	for i = 0; i < count; i++ {
+		items = append(items, i)
+	}
+	return items
+}
+
+// Iterate returns a slice of ints, starting at a, going to count
+func Iterate2(a, count int) []int {
+	var i int
+	var items []int
+	for i = a; i < count; i++ {
 		items = append(items, i)
 	}
 	return items
@@ -59,17 +70,32 @@ func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateDa
 	if app.Session.Exists(r.Context(), "user_id") {
 		td.IsAuthenticated = 1
 	}
+	
 	return td
+
+}
+
+
+// RenderTemplate renders a template
+func RenderTemplate(w http.ResponseWriter, tmpl string) {
+	parsedTemplate, _ := template.ParseFiles("./templates/" + tmpl, "./templates/base.layout.tmpl")
+	err := parsedTemplate.Execute(w, nil)
+	if err != nil {
+		fmt.Println("error parsing template:", err)
+	}
 }
 
 // Template renders a template
 func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
+	
 	var tc map[string]*template.Template
-
+	
 	if app.UseCache {
 		// get the template cache from the app config
+		
 		tc = app.TemplateCache
 	} else {
+		
 		tc, _ = CreateTemplateCache()
 	}
 
@@ -77,18 +103,18 @@ func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *models.Te
 	if !ok {
 		log.Fatal("Could not get template from template cache")
 	}
-
+	
 	buf := new(bytes.Buffer)
 
 	td = AddDefaultData(td, r)
-
+	
 	_ = t.Execute(buf, td)
-
+	
 	_, err := buf.WriteTo(w)
 	if err != nil {
 		fmt.Println("error writing template to browser", err)
 	}
-
+	
 }
 
 // CreateTemplateCache creates a template cache as a map

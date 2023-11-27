@@ -9,6 +9,7 @@ import (
 	"github.com/tijanadmi/go-sarto/internal/handlers"
 )
 
+
 func routes(app *config.AppConfig) http.Handler {
 	mux := chi.NewRouter()
 
@@ -16,7 +17,12 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Use(NoSurf)
 	mux.Use(SessionLoad)
 
+	
+	
+	
 	mux.Get("/", handlers.Repo.Home)
+	
+	
 	mux.Get("/about", handlers.Repo.About)
 	mux.Get("/rooms", handlers.Repo.Rooms)
 
@@ -32,6 +38,7 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Get("/book-room", handlers.Repo.BookRoom)
 
 	mux.Get("/contact", handlers.Repo.Contact)
+	mux.Post("/contact", handlers.Repo.PostContact)
 
 	mux.Get("/make-reservation", handlers.Repo.Reservation)
 	mux.Post("/make-reservation", handlers.Repo.PostReservation)
@@ -44,8 +51,7 @@ func routes(app *config.AppConfig) http.Handler {
 
 
 
-	FileServer := http.FileServer(http.Dir("./static/"))
-	mux.Handle("/static/*", http.StripPrefix("/static", FileServer))
+	
 
 	
 
@@ -63,6 +69,9 @@ func routes(app *config.AppConfig) http.Handler {
 		mux.Get("/reservations/{src}/{id}/show", handlers.Repo.AdminShowReservation)
 		mux.Post("/reservations/{src}/{id}", handlers.Repo.AdminPostShowReservation)
 	})
-
+	
+	FileServer := http.FileServer(http.Dir("./static/"))
+	mux.Handle("/static/*", http.StripPrefix("/static", FileServer))
+	
 	return mux
 }

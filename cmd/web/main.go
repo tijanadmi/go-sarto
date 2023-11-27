@@ -61,6 +61,7 @@ func main() {
 		Handler: routes(&app),
 	}
 
+	
 	err = srv.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
@@ -134,7 +135,7 @@ func run() (*driver.DB, error) {
 		log.Fatal("cannot create template cache")
 		return nil, err
 	}
-
+	
 	app.TemplateCache = tc
 
 	repo := handlers.NewRepo(&app, db)

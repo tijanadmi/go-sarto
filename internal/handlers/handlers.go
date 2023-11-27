@@ -43,11 +43,18 @@ func NewHandlers(r *Repository) {
 	Repo = r
 }
 
+
 // Home is the handler for the home page
+/*func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "home.page.tmpl")
+}*/
+
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	/*remoteIP := r.RemoteAddr
-	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)*/
+	
+	
+	
 	m.DB.AllUsers()
+	
 	render.Template(w, r, "home.page.tmpl", &models.TemplateData{})
 }
 
@@ -260,9 +267,9 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	//send notifications - first to guest
 
 	htmlMassage := fmt.Sprintf(`
-		<strong>Reservation Confirmation</strong><br><br>
+		<strong>Request Confirmation</strong><br><br>
 		Dear %s: <br><br>
-		This is confirm your reservation from %s to %s.
+		Your request for reservation from %s to %s has been received. In the next 24 hours, someone will contact you to confirm the reservation
 	`, reservation.FirstName, reservation.StartDate.Format("02.01.2006"), reservation.EndDate.Format("02.01.2006"))
 	msg := models.MailData{
 		To:       reservation.Email,
@@ -281,7 +288,7 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		Reservation has been made for %s to %s.
 	`, reservation.StartDate.Format("02.01.2006"), reservation.EndDate.Format("02.01.2006"))
 	msg = models.MailData{
-		To:      "tijanadmi@yahoo",
+		To:      "tijanadmi@yahoo.com",
 		From:    "me@here.co",
 		Subject: "Reservation Notification",
 		Content: htmlMassage,
@@ -310,6 +317,58 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/reservation-summary", http.StatusSeeOther)
 
 }
+
+// PostReservation handles the posting of a reservation form
+func (m *Repository) PostContact(w http.ResponseWriter, r *http.Request) {
+	
+	err := r.ParseForm()
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+
+	name := r.Form.Get("name")
+	email := r.Form.Get("email")
+	subject := r.Form.Get("subject")
+	message := r.Form.Get("message")
+
+	form := forms.New(r.PostForm)
+	form.Required("email","subject","message","name")
+	form.IsEmail("email")
+
+	if !form.Valid() {
+		render.Template(w, r, "contact.page.tmpl", &models.TemplateData{
+			Form: form,
+		})
+		return
+	}
+
+	
+	//send notifications - first to owner
+
+	htmlMassage := fmt.Sprintf(`
+		<strong>Message received from %s - %s</strong><br><br>
+		Message is: %s.
+	`, name, email,message)
+	msg := models.MailData{
+		To:      "tijanadmi@yahoo.com",
+		From:    email,
+		Subject: subject,
+		Content: htmlMassage,
+		Template: "basic.html",
+	}
+
+	m.App.MailChan <- msg
+
+	
+	m.App.Session.Put(r.Context(), "flash", "Message has been send")
+	
+	//m.App.Session.Put(r.Context(), "reservation", reservation)
+
+	http.Redirect(w, r, "/contact", http.StatusSeeOther)
+
+}
+
 
 // Availability renders the search availability page
 func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
@@ -428,7 +487,10 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 
 // Contact renders the contact page
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
-	render.Template(w, r, "contact.page.tmpl", &models.TemplateData{})
+	
+	render.Template(w, r, "contact.page.tmpl", &models.TemplateData{
+		Form: forms.New(nil),
+	})
 }
 
 // ReservationSummary renders the reservation-summary page
@@ -460,7 +522,7 @@ func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) 
 // ChooseRoom displays list of available rooms
 func (m *Repository) ChooseRoom(w http.ResponseWriter, r *http.Request) {
 	// used to have next 6 lines
-	log.Println("Usao u ChooseRoom")
+	
 	/*roomID, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		log.Println(err)
@@ -769,14 +831,14 @@ func (m *Repository) AdminReservationsCalendar(w http.ResponseWriter, r *http.Re
 				// it's a reservation
 				for d := y.StartDate; !d.After(y.EndDate); d = d.AddDate(0, 0, 1) {
 					reservationMap[d.Format("2006-01-2")] = y.ReservationID
-					fmt.Printf("ROOM_ID=%d, Reservation value=%d For day=%s ", x.ID, reservationMap[d.Format("2006-01-2")], y.StartDate.Format("2006-01-2"))
-					fmt.Println()
+					/*fmt.Printf("ROOM_ID=%d, Reservation value=%d For day=%s ", x.ID, reservationMap[d.Format("2006-01-2")], y.StartDate.Format("2006-01-2"))
+					fmt.Println()*/
 				}
 			} else {
 				// it's a block
 				blockMap[y.StartDate.Format("2006-01-2")] = y.ID
-				fmt.Printf("ROOM_ID=%d, Blocked value=%d For day=%s ", x.ID, blockMap[y.StartDate.Format("2006-01-2")], y.StartDate.Format("2006-01-2"))
-				fmt.Println()
+				/*fmt.Printf("ROOM_ID=%d, Blocked value=%d For day=%s ", x.ID, blockMap[y.StartDate.Format("2006-01-2")], y.StartDate.Format("2006-01-2"))
+				fmt.Println()*/
 			}
 
 		}

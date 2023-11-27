@@ -1,99 +1,108 @@
 {{template "base" .}}
 
 {{define "content"}}
+
+<!-- ======= Hero Section ======= -->
+  <section id="" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+      <div class="row">
+        <div class="col-lg-8">
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+    <main id="main">
     {{$rm := index .Data "room"}}
-<div class="container container-fluid">
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <p>{{$rm.RoomNameEn}}</p>
+          <p1>{{$rm.RoomShortDescEn}}</p1>
+        </div>
+      </div>
+
+      
+    </section><!-- End Contact Section -->
+
+    <section id="room" class="testimonials">
+      <div class="container" data-aos="fade-up">
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div >
+                  <img src="/static/images/{{$rm.RoomPictureFolder}}/1.jpg" class="img-fluid" alt="">
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div >
+                  <img src="/static/images/{{$rm.RoomPictureFolder}}/2.jpg" class="img-fluid" alt="">
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div >
+                  <img src="/static/images/{{$rm.RoomPictureFolder}}/3.jpg" class="img-fluid" alt="">
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div >
+                  <img src="/static/images/{{$rm.RoomPictureFolder}}/4.jpg" class="img-fluid" alt="">
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+       <div class="container container-fluid">
 	<div class="row">
-            <div class="col">
-            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class=""></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="/static/images/{{$rm.RoomPictureFolder}}/1.jpg" class="d-block w-100" alt="...">
-        
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1></h1>
-            <p></p>
-            
-          </div>
-        </div>
-        </div>
-      <div class="carousel-item">
-        <img src="/static/images/{{$rm.RoomPictureFolder}}/2.jpg" class="d-block w-100" alt="...">
-
-         <div class="container">
-          <div class="carousel-caption">
-            <h1></h1>
-            <p></p>
-            
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="/static/images/{{$rm.RoomPictureFolder}}/3.jpg" class="d-block w-100" alt="...">
-        <div class="container">
-          <div class="carousel-caption text-end">
-            <h1></h1>
-            <p></p>
-            
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="/static/images/{{$rm.RoomPictureFolder}}/4.jpg" class="d-block w-100" alt="...">
-
-        <div class="container">
-          <div class="carousel-caption text-end">
-            <h1></h1>
-            <p></p>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-
-            
-        </div>
    <div class="row">
             <div class="col">
-                <h1 class="text-center mt-5">{{$rm.RoomNameEn}}</h1>
+              <br>
                 <p>
-                    <br>{{$rm.RoomShortDescEn}}
-                    <hr>
-                    {{$rm.RoomDescEn}}
+                    {{$rm.RoomDescEn}} 
                 </p>
             </div>
      </div>
 	 <div class="row">
             <div class="col text-center">
-				<a id="check-availability-button" href="#!" class="btn btn-success">Check Availability</a>
+				<a id="check-availability-button" href="#!" class="btn">Check Availability</a>
 				
             </div>
     </div>
 		
 </div>	
+    </section><!-- End Testimonials Section -->
+
+    
+   
+
+  </main><!-- End #main -->
+  
+
 {{end}}
 {{define "js"}}
 {{$rm := index .Data "room"}}
 <script>
     document.getElementById("check-availability-button").addEventListener("click", function () {
         let html = `
-        <form id="check-availability-form" action="" method="post" novalidate class="needs-validation search-form">
+        <form id="check-availability-form" action="" method="post" autocomplete="off" novalidate class="needs-validation search-form">
             <div class="row">
                 <div class="col">
                     <div class="row" id="reservation-dates-modal">
