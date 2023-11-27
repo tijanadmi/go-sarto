@@ -1,0 +1,1 @@
+DROP TABLE "add_user_toes";
